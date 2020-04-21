@@ -1,1 +1,2 @@
 # assign5git
+For now, I am planning to use the three recommended desigin patterns for my Project.  I would like to use the decorator pattern to append affinities to farmers, animals and crops (and perhaps farming equipment like tractors, combines etc.)  I would like to use a factory pattern for creating farmers, crops, animals, equipment (possibly an abstract factory to create the entire farm from these components). Finally, to use the mediator pattern to tick through day and night cycles.
