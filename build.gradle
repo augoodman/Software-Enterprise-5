@@ -1,12 +1,13 @@
 plugins {
     id "com.github.spotbugs" version "3.0.0"
     id "checkstyle"
-    id "jacoco"
 }
 
 apply plugin: 'application'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.spotbugs'
+
+test.finalizedBy jacocoTestReport
 
 mainClassName = 'main.java.Main'
 
@@ -18,7 +19,7 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
     compile "junit:junit:4.12"
-    compile files('cls/')
+    testCompile "junit:junit:4.12"
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -50,13 +51,6 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
     xml.enabled = false
     html.enabled = true
   }
-}
-
-// Create Executable File
-jar {
-    manifest {
-        attributes 'Main-Class': 'main.java.Main'
-    }
 }
 
 spotbugs {

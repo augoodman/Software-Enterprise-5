@@ -1,14 +1,14 @@
-package test;
+package test.java;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import main.java.Main;
+import main.java.SampleClass;
 public class Assign5Test {
 
     @Test
     public void simpleTest() {
-        assertEquals(Main.getTestResult(), 0);
+        assertEquals(SampleClass.getTestResult(), 0);
     }
 
 }
