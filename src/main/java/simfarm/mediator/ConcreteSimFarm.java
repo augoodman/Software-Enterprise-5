@@ -10,8 +10,13 @@ public class ConcreteSimFarm extends AbstractSimFarm {
 
 	@Override
 	public void send(String msg, Farm farm) {
-        System.out.println(this.getFarm().getName() + msg);
+        System.out.println(this.getFarm().getName() + " " + msg);
         //getMediator().sendMessage(msg, farm);		
+	}
+
+	@Override
+	public void receive(String msg) {
+        System.out.println(this.getFarm().getName() + " " + msg);
 	}
 
 }

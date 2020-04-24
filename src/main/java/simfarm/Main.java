@@ -8,7 +8,6 @@ import main.java.simfarm.crop.*;
 import main.java.simfarm.decorator.*;
 import main.java.simfarm.farm.*;
 import main.java.simfarm.farmer.*;
-import main.java.simfarm.mediator.ConcreteMediator;
 
 public class Main {
 	public static void main(String[] args) {
@@ -50,6 +49,6 @@ public class Main {
 		System.out.println(b);
 		ArrayList<Farm> farmList = new ArrayList<Farm>();
 		farmList.add(hf);
-		SimFarm sf = new SimFarm(farmList);
+		SimFarm.simulate(farmList);
 	}
 }

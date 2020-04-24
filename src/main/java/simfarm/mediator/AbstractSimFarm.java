@@ -13,6 +13,8 @@ public abstract class AbstractSimFarm {
     
     public abstract void send(String msg, Farm farm);
     
+    public abstract void receive(String msg);
+    
     public MediatorInterface getMediator() {
     	return mediator;
     }

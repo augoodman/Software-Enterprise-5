@@ -6,13 +6,9 @@ import main.java.simfarm.farm.Farm;
 import main.java.simfarm.mediator.*;
 
 public class SimFarm {
-	MediatorInterface mediator = new ConcreteMediator();
+	static MediatorInterface mediator = new ConcreteMediator();
 	
-	public SimFarm(ArrayList<Farm> farmList) {
-		simulate(farmList);
-	}
-	
-	public void simulate(ArrayList<Farm> farmList) {
+	public static void simulate(ArrayList<Farm> farmList) {
 		for(Farm farm : farmList) {
 			AbstractSimFarm simFarm = new ConcreteSimFarm(mediator, farm);
 			mediator.addAsf(simFarm);
