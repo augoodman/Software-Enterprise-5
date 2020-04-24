@@ -5,6 +5,8 @@ public class HybridFarm extends Farm{
 	private int money;
 	private int employees;
 	private int size;
+	private String name = "Hybrid Farm";
+
 	
 	public HybridFarm() {
 		this.level = 0;
@@ -31,6 +33,21 @@ public class HybridFarm extends Farm{
 	@Override
 	public int getSize() {
 		return size;
+	}
+
+	@Override
+	public void spendMoney(int dollars) {
+		this.money -= dollars;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

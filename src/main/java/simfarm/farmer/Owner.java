@@ -6,15 +6,15 @@ public class Owner extends Farmer {
 	private int harvesterSkill;
 	private int breederSkill;
 	private int horticultureSkill;
-	private int veterinarySkill;
+	private int veterinarianSkill;
 
-	public Owner(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarySkill) {
+	public Owner(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarianSkill) {
 		this.businessSkill = businessSkill;
 		this.farmWorkerSkill = farmWorkerSkill;
 		this.harvesterSkill = harvesterSkill;
 		this.breederSkill = breederSkill;
 		this.horticultureSkill = horticultureSkill;
-		this.veterinarySkill = veterinarySkill;
+		this.veterinarianSkill = veterinarianSkill;
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class Owner extends Farmer {
 	}
 
 	@Override
-	public int getVeterinarySkill() {
-		return veterinarySkill;
+	public int getVeterinarianSkill() {
+		return veterinarianSkill;
 	}
 
 }

@@ -5,6 +5,7 @@ public class AnimalFarm extends Farm{
 	private int money;
 	private int employees;
 	private int size;
+	private String name = "Animal Farm";
 	
 	public AnimalFarm() {
 		this.level = 0;
@@ -31,6 +32,21 @@ public class AnimalFarm extends Farm{
 	@Override
 	public int getSize() {
 		return size;
+	}
+
+	@Override
+	public void spendMoney(int dollars) {
+		this.money -= dollars;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

@@ -1,20 +1,20 @@
 package main.java.simfarm.farmer;
 
-public class Veterinary extends Farmer {
+public class Veterinarian extends Farmer {
 	private int businessSkill;
 	private int farmWorkerSkill;
 	private int harvesterSkill;
 	private int breederSkill;
 	private int horticultureSkill;
-	private int veterinarySkill;
+	private int veterinarianSkill;
 
-	public Veterinary(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarySkill) {
+	public Veterinarian(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarianSkill) {
 		this.businessSkill = businessSkill;
 		this.farmWorkerSkill = farmWorkerSkill;
 		this.harvesterSkill = harvesterSkill;
 		this.breederSkill = breederSkill;
 		this.horticultureSkill = horticultureSkill;
-		this.veterinarySkill = veterinarySkill;
+		this.veterinarianSkill = veterinarianSkill;
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class Veterinary extends Farmer {
 	}
 
 	@Override
-	public int getVeterinarySkill() {
-		return veterinarySkill;
+	public int getVeterinarianSkill() {
+		return veterinarianSkill;
 	}
 
 }

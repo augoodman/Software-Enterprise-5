@@ -6,6 +6,11 @@ public abstract class Farm {
 	public abstract int getMoney();
 	public abstract int getEmployees();
 	public abstract int getSize();
+	public abstract void spendMoney(int dollars);
+	public abstract String getName();
+	
+	//change farm name
+	public abstract void setName(String name);
 
 	@Override
     public String toString(){
