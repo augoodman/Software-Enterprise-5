@@ -3,6 +3,8 @@ package main.java.simfarm.crop;
 public class Rice extends Crop {
 	private int size;
 	private int diseaseResistance;
+	private int numCrops;
+	private String type = "Rice";
 
 	public Rice(int size, int diseaseResistance) {
 		this.size = size;
@@ -17,6 +19,25 @@ public class Rice extends Crop {
 	@Override
 	public int getDiseaseResistance() {
 		return diseaseResistance;
-	}	
+	}
 
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public int getNumCrops() {
+		return numCrops;
+	}
+
+	@Override
+	public void cropExchanged(String boughtOrSold) {
+		if(boughtOrSold.equalsIgnoreCase("bought")) {
+			this.numCrops++;
+		}
+		else {
+			this.numCrops--;
+		}
+	}
 }

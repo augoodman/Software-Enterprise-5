@@ -11,7 +11,7 @@ public abstract class AbstractSimFarm {
         this.farm = farm;
     }
     
-    public abstract void send(String msg, Farm farm);
+    public abstract void send(String msg);
     
     public abstract void receive(String msg);
     

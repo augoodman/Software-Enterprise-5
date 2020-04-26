@@ -7,6 +7,10 @@ public abstract class Animal {
 	public abstract int getDiseaseResistance();
 	public abstract int getBreedability();
 	public abstract int getAggression();
+	public abstract String getType();
+	public abstract String getGender();
+	public abstract void setGender(String gender);
+	public abstract void animalExchanged(String boughtOrSold);
 
     @Override
     public String toString(){

@@ -5,6 +5,9 @@ public class Pig extends Animal{
 	private int diseaseResistance;
 	private int breedability;
 	private int aggression;
+	private int numAnimals;
+	private String type = "Pig";
+	private String gender;
 	
 	public Pig(int size, int diseaseResistance, int breedability, int aggression) {
 		this.size = size;
@@ -31,6 +34,29 @@ public class Pig extends Animal{
 	@Override
 	public int getAggression() {
 		return aggression;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public void animalExchanged(String boughtOrSold) {
+		if(boughtOrSold.equalsIgnoreCase("bought")) {
+			this.numAnimals++;
+		}
+		else {
+			this.numAnimals--;
+		}
+	}
+	
+	public String getGender() {
+		return gender;
+	}
+	
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }

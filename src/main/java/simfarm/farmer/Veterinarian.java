@@ -7,6 +7,7 @@ public class Veterinarian extends Farmer {
 	private int breederSkill;
 	private int horticultureSkill;
 	private int veterinarianSkill;
+	private String type = "Veterinarian";
 
 	public Veterinarian(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarianSkill) {
 		this.businessSkill = businessSkill;
@@ -47,4 +48,9 @@ public class Veterinarian extends Farmer {
 		return veterinarianSkill;
 	}
 
+	@Override
+	public String getType() {
+		return type;
+	}
+	
 }

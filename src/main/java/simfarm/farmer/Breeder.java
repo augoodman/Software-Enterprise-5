@@ -7,6 +7,7 @@ public class Breeder extends Farmer {
 	private int breederSkill;
 	private int horticultureSkill;
 	private int veterinarianSkill;
+	private String type = "Breeder";
 
 	public Breeder(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarianSkill) {
 		this.businessSkill = businessSkill;
@@ -45,6 +46,11 @@ public class Breeder extends Farmer {
 	@Override
 	public int getVeterinarianSkill() {
 		return veterinarianSkill;
+	}
+
+	@Override
+	public String getType() {
+		return type;
 	}
 
 }
