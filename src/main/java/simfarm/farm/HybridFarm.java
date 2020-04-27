@@ -12,8 +12,6 @@ public class HybridFarm extends Farm {
 	private int level;
 	private int money;
 	private int numFarmers;
-	private int numAnimals;
-	private int numCrops;
 	private int acres;
 	private int businessSkill;
 	private int farmWorkerSkill;
@@ -61,7 +59,6 @@ public class HybridFarm extends Farm {
 				animal.setGender("Male");
 			}
 		}
-		this.numAnimals = 12;
 		for(int i = 0; i < 10; i++) {
 			cropList.add(cf.create("Barley"));
 			cropList.add(cf.create("Corn"));
@@ -72,7 +69,6 @@ public class HybridFarm extends Farm {
 			cropList.add(cf.create("Tomato"));
 			cropList.add(cf.create("Wheat"));
 		}
-		this.numCrops = 80;
 	}
 
 	@Override
@@ -94,7 +90,37 @@ public class HybridFarm extends Farm {
 	public int getAcres() {
 		return acres;
 	}
-
+	
+	@Override
+	public int getBusinessSkill() {
+		return businessSkill;
+	}
+	
+	@Override
+	public int getFarmWorkerSkill() {
+		return farmWorkerSkill;
+	}
+	
+	@Override
+	public int getHarvesterSkill(){
+		return harvesterSkill;
+	}
+	
+	@Override
+	public int getBreederSkill() {
+		return breederSkill;
+	}
+	
+	@Override
+	public int getHorticultureSkill() {
+		return horticultureSkill;
+	}
+	
+	@Override
+	public int getVeterinarianSkill() {
+		return veterinarianSkill;
+	}
+	
 	@Override
 	public void transaction(int dollars) {
 		this.money -= dollars;
@@ -123,37 +149,37 @@ public class HybridFarm extends Farm {
 		FarmerFactory ff = (FarmerFactory) fp.getFactory("Farmer");
 		switch (farmerType) {
 		case "Breeder":
-			removeFarmer(farmer);
+			transferFarmer(farmer);
 			BreederDecorator bd = new BreederDecorator((FarmerFactory) ff);
 			farmer = bd.create(farmerType);
 			farmerList.add(farmer);
 			break;
 		case "FarmWorker":
-			removeFarmer(farmer);
+			transferFarmer(farmer);
 			FarmWorkerDecorator fwd = new FarmWorkerDecorator((FarmerFactory) ff);
 			farmer = fwd.create(farmerType);
 			farmerList.add(farmer);
 			break;
 		case "Harvester":
-			removeFarmer(farmer);
+			transferFarmer(farmer);
 			HarvesterDecorator hd = new HarvesterDecorator((FarmerFactory) ff);
 			farmer = hd.create(farmerType);
 			farmerList.add(farmer);
 			break;
 		case "Horticulturist":
-			removeFarmer(farmer);
+			transferFarmer(farmer);
 			HorticulturistDecorator hod = new HorticulturistDecorator((FarmerFactory) ff);
 			farmer = hod.create(farmerType);
 			farmerList.add(farmer);
 			break;
 		case "Owner":
-			removeFarmer(farmer);
+			transferFarmer(farmer);
 			OwnerDecorator od = new OwnerDecorator((FarmerFactory) ff);
 			farmer = od.create(farmerType);
 			farmerList.add(farmer);
 			break;
 		case "Veterinarian":
-			removeFarmer(farmer);
+			transferFarmer(farmer);
 			VeterinarianDecorator vd = new VeterinarianDecorator((FarmerFactory) ff);
 			farmer = vd.create(farmerType);
 			farmerList.add(farmer);
@@ -164,13 +190,14 @@ public class HybridFarm extends Farm {
 	}
 
 	@Override
-	public void removeFarmer(Farmer farmer) {
+	public Farmer transferFarmer(Farmer farmer) {
 		farmerList.remove(farmer);
+		return farmer;
 	}
 
 	@Override
 	public void expandFarm(int acres) {
-		acres += acres;
+		this.acres += acres;
 		//transaction(-pricePerAcre);
 	}
 
@@ -198,6 +225,16 @@ public class HybridFarm extends Farm {
 	@Override
 	public ArrayList<Crop> getCrops() {
 		return cropList;
+	}
+
+	@Override
+	public void buy(int price) {
+		money = money - price;
+	}
+
+	@Override
+	public void sell(int price) {
+		money = money + price;
 	}
 	
 	public void buyAnimal(Animal animal, int num) {

@@ -4,6 +4,7 @@ public class Barley extends Crop {
 	private int size;
 	private int diseaseResistance;
 	private int numCrops;
+	private int age;
 	private String type = "Barley";
 	
 	public Barley(int size, int diseaseResistance) {
@@ -32,6 +33,11 @@ public class Barley extends Crop {
 	}
 
 	@Override
+	public int getAge() {
+		return age;
+	}
+	
+	@Override
 	public void cropExchanged(String boughtOrSold) {
 		if(boughtOrSold.equalsIgnoreCase("bought")) {
 			this.numCrops++;
@@ -40,4 +46,15 @@ public class Barley extends Crop {
 			this.numCrops--;
 		}
 	}
+
+	@Override
+	public void incrementAge() {
+		this.age++;
+	}
+
+	@Override
+	public void resetAge() {
+		this.age = 0;
+	}
+	
 }

@@ -5,8 +5,11 @@ public abstract class Crop {
 	public abstract int getSize();
 	public abstract int getDiseaseResistance();
 	public abstract int getNumCrops();
+	public abstract int getAge();
 	public abstract String getType();
 	public abstract void cropExchanged(String boughtOrSold);
+	public abstract void incrementAge();
+	public abstract void resetAge();
 
     @Override
     public String toString(){
