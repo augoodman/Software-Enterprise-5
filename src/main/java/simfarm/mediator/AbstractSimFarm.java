@@ -1,6 +1,7 @@
 package main.java.simfarm.mediator;
 
 import main.java.simfarm.farm.Farm;
+import main.java.simfarm.simulation.ManageLand;
 
 public abstract class AbstractSimFarm {
     private MediatorInterface mediator;
@@ -13,7 +14,7 @@ public abstract class AbstractSimFarm {
 
     public abstract void send(String msg);
 
-    public abstract void receive(String msg);
+    public abstract void simulate(Farm farm, AbstractSimFarm simFarm, ManageLand ml);
 
     public MediatorInterface getMediator() {
         return mediator;

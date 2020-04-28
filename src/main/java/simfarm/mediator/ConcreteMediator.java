@@ -12,7 +12,6 @@ public class ConcreteMediator implements MediatorInterface {
     @Override
     public void sendMessage(String msg, Farm farm) {
         AbstractSimFarm asf = asfMap.get(farm);
-        asf.receive(msg);
     }
 
     @Override
