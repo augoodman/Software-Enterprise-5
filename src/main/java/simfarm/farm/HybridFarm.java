@@ -31,7 +31,7 @@ public class HybridFarm extends Farm {
 	public HybridFarm() {
 		this.level = 0;
 		this.money = 1000;
-		this.acres = 5;
+		this.acres = 10;
 		farmerList.add(ff.create("Owner"));
 		farmerList.add(ff.create("Breeder"));
 		farmerList.add(ff.create("FarmWorker"));
@@ -229,42 +229,29 @@ public class HybridFarm extends Farm {
 
 	@Override
 	public void buy(int price) {
-		money = money - price;
+		money -= price;
 	}
 
 	@Override
 	public void sell(int price) {
-		money = money + price;
-	}
-	
-	public void buyAnimal(Animal animal, int num) {
-		for (int i = 0; i < num; i++) {
-			Animal a = (Animal) fp.getFactory("Crop").create(animal.getType());
-			animalList.add(a);
-			animal.animalExchanged("bought");
-		}
+		money += price;
 	}
 
-	public void sellAnimal(Animal animal, int num) {
-		for(int i = 0; i < num; i++) {
-			animalList.remove(animal);
-			animal.animalExchanged("sold");
+	@Override
+	public int levelUp() {
+		if(this.money >= 25000 && this.money < 50000) {
+			this.level = 2;
 		}
-	}
-	
-	public void buyCrop(Crop crop, int num) {
-		for (int i = 0; i < num; i++) {
-			Crop c = (Crop) fp.getFactory("Crop").create(crop.getType());
-			cropList.add(c);
-			crop.cropExchanged("bought");
+		else if(this.money >= 50000 && this.money < 100000) {
+			this.level = 3;
 		}
-	}
-
-	public void sellCrop(Crop crop, int num) {
-		for(int i = 0; i < num; i++) {
-			cropList.remove(crop);
-			crop.cropExchanged("sold");
+		else if(this.money >= 100000 && this.money < 200000) {
+			this.level = 4;
 		}
+		else if(this.money >= 200000) {
+			this.level = 5;
+		}
+		return level;
 	}
 
 }

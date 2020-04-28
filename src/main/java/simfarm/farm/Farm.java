@@ -22,8 +22,13 @@ public abstract class Farm {
 	public abstract ArrayList<Farmer> getFarmers();
 	public abstract ArrayList<Animal> getAnimals();
 	public abstract ArrayList<Crop> getCrops();
+	
+	//buy or sell at given price
 	public abstract void buy(int price);
 	public abstract void sell(int price);
+	
+	//level up farm
+	public abstract int levelUp();
 
 	//change farm name
 	public abstract void setType(String name);

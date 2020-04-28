@@ -13,89 +13,113 @@ public class ExchangeAnimals {
 		int animalToBuy = r.nextInt(8);
 		switch(animalToBuy) {
 		case 0:
-			if(farm.getMoney() > 50) {
-				farm.getAnimals().add(af.create("Chicken"));
-				farm.buy(50);
-			}
-			break;
-		case 1:
-			if(farm.getMoney() > 500) {
-				farm.getAnimals().add(af.create("Cow"));
-				farm.buy(500);
-			}
-			break;
-		case 2:
-			if(farm.getMoney() > 250) {
-				farm.getAnimals().add(af.create("Goat"));
-				farm.buy(250);
-			}
-			break;
-		case 3:
-			if(farm.getMoney() > 1000) {
-				farm.getAnimals().add(af.create("Horse"));
-				farm.buy(1000);
-			}
-			break;
-		case 4:
 			if(farm.getMoney() > 100) {
-				farm.getAnimals().add(af.create("Pig"));
+				farm.getAnimals().add(af.create("Chicken"));
 				farm.buy(100);
 			}
 			break;
+		case 1:
+			if(farm.getMoney() > 750) {
+				farm.getAnimals().add(af.create("Cow"));
+				farm.buy(750);
+			}
+			break;
+		case 2:
+			if(farm.getMoney() > 500) {
+				farm.getAnimals().add(af.create("Goat"));
+				farm.buy(500);
+			}
+			break;
+		case 3:
+			if(farm.getMoney() > 2000) {
+				farm.getAnimals().add(af.create("Horse"));
+				farm.buy(2000);
+			}
+			break;
+		case 4:
+			if(farm.getMoney() > 250) {
+				farm.getAnimals().add(af.create("Pig"));
+				farm.buy(250);
+			}
+			break;
 		default:
-			if(farm.getMoney() > 300) {
+			if(farm.getMoney() > 500) {
 				farm.getAnimals().add(af.create("Sheep"));
-				farm.buy(300);
+				farm.buy(500);
 			}
 		}
 	}
 	
 	public void sellAnimals(Farm farm) {
 		int runningTotal = 0;
+		int productDailyLimit = farm.getBusinessSkill() / 5;
+		int productSold = 0;
+		ArrayList<Animal> animalsToRemove = new ArrayList<Animal>();
+		int slaughterDailyLimit = farm.getBusinessSkill() / 20;
+		int numSlaughtered = 0;
+		
 		for(Animal animal : farm.getAnimals()) {
 			if(animal.getProductAge() >= 2) {
 				//animal.resetProductClock();
 				switch(animal.getType()) {
 				case "Chicken":
 					//sell eggs
-					farm.sell(3);
-					runningTotal += 3;
+					if(productSold >= productDailyLimit) {
+						break;
+					}
+					runningTotal += 5;
+					productSold++;
 					break;
 				case "Goat":
 					//sell goat milk
-					farm.sell(15);
-					runningTotal += 15;
+					if(productSold >= productDailyLimit) {
+						break;
+					}
+					runningTotal += 25;
+					productSold++;
 					break;
 				default:
 					//sell sheep wool
-					farm.sell(30);
-					runningTotal += 15;
+					if(productSold >= productDailyLimit) {
+						break;
+					}
+					runningTotal += 50;
+					productSold++;
 				}
 			}
 		}
 		
-		ArrayList<Animal> animalsToRemove = new ArrayList<Animal>();
 		for(Animal animal : farm.getAnimals()) {
-			if(animal.getProductAge() >= 10) {
+			if(animal.getProductAge() >= 3) {
 				switch(animal.getType()) {
 				case "Cow":
 					//slaughter cow and sell beef
-					farm.sell(750);
-					animalsToRemove.add(animal);
-					runningTotal += 750;
-					break;
-				case "Horse":
-					//sell horse
-					farm.sell(1500);
+					if(numSlaughtered >= slaughterDailyLimit) {
+						break;
+					}
 					animalsToRemove.add(animal);
 					runningTotal += 1500;
+					numSlaughtered++;
+					break;
+				case "Horse":
+					//sell horse for labor (not slaughterd ;D)
+					if(numSlaughtered >= slaughterDailyLimit) {
+						break;
+					}
+					animalsToRemove.add(animal);
+					runningTotal += 3000;
+					numSlaughtered++;
+
 					break;
 				default:
 					//slaughter pig and sell pork
-					farm.sell(300);
+					if(numSlaughtered >= slaughterDailyLimit) {
+						break;
+					}
 					animalsToRemove.add(animal);
-					runningTotal += 300;
-					break;
+					runningTotal += 600;
+					numSlaughtered++;
+
 				}
 			}
 		}
@@ -106,6 +130,7 @@ public class ExchangeAnimals {
 		
 		//bonus sales price based on breeder skill
 		double bonus = (double) farm.getBreederSkill() / 1000;
-		farm.sell((int) ((double) runningTotal * bonus));
+		int discount = (int) ((double) runningTotal * bonus);
+		farm.sell(runningTotal - discount);
 	}
 }

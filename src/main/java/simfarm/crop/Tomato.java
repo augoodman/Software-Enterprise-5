@@ -6,6 +6,8 @@ public class Tomato extends Crop {
 	private int numCrops;
 	private int age;
 	private String type = "Tomato";
+	private boolean isDiseased = false;
+	private int daysDiseased = 0;
 
 	public Tomato(int size, int diseaseResistance) {
 		this.size = size;
@@ -55,6 +57,31 @@ public class Tomato extends Crop {
 	@Override
 	public void resetAge() {
 		this.age = 0;
+	}
+
+	@Override
+	public boolean isDiseased() {
+		return isDiseased;
+	}
+
+	@Override
+	public int daysDiseased() {
+		return daysDiseased;
+	}
+
+	@Override
+	public void incrementDaysDiseased() {
+		daysDiseased++;
+	}
+
+	@Override
+	public void diseased() {
+		this.isDiseased = true;
+	}
+
+	@Override
+	public void healed() {
+		this.isDiseased = false;
 	}
 	
 }

@@ -8,6 +8,7 @@ public class FarmWorker extends Farmer {
 	private int horticultureSkill;
 	private int veterinarianSkill;
 	private String type = "FarmWorker";
+	private boolean isDecorated = false;
 
 	public FarmWorker(int businessSkill, int farmWorkerSkill, int harvesterSkill, int breederSkill, int horticultureSkill, int veterinarianSkill) {
 		this.businessSkill = businessSkill;
@@ -52,5 +53,15 @@ public class FarmWorker extends Farmer {
 	public String getType() {
 		return type;
 	}
-	
+
+	@Override
+	public boolean isDecorated() {
+		return isDecorated;
+	}
+
+	@Override
+	public void decorate() {
+		this.isDecorated = true;
+	}
+
 }

@@ -9,6 +9,8 @@ public abstract class Farmer {
 	public abstract int getHorticultureSkill();
 	public abstract int getVeterinarianSkill();
 	public abstract String getType();
+	public abstract boolean isDecorated();
+	public abstract void decorate();
 	
     @Override
     public String toString(){

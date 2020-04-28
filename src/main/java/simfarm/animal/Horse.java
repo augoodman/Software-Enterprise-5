@@ -20,19 +20,21 @@ public class Horse extends Animal {
 	private boolean isPregnant = false;
 	private int daysPregnant = 0;
 	private int daysSinceLastBirth = 0;
+	private boolean isDiseased = false;
+	private int daysDiseased = 0;
 	
-		public Horse(int size, int diseaseResistance, int breedability, int aggression) {
-			this.size = size;
-			this.diseaseResistance = diseaseResistance;
-			this.breedability = breedability;
-			this.aggression = aggression;
-			int g = r.nextInt(1);
-			if(g == 0) {
-				this.gender = "Female";
-			}
-			else {
-				this.gender = "Male";
-			}
+	public Horse(int size, int diseaseResistance, int breedability, int aggression) {
+		this.size = size;
+		this.diseaseResistance = diseaseResistance;
+		this.breedability = breedability;
+		this.aggression = aggression;
+		int g = r.nextInt(2);
+		if(g == 0) {
+			this.gender = "Female";
+		}
+		else {
+			this.gender = "Male";
+		}
 	}
 
 	@Override
@@ -132,8 +134,10 @@ public class Horse extends Animal {
 	
 	@Override
 	public Animal giveBirth(Farm farm, AbstractFactory<Animal> af) {
+		this.daysPregnant = 0;
+		this.daysSinceLastBirth = 0;
 		this.isPregnant = false;
-		return af.create("Cow");
+		return af.create("Horse");
 	}
 
 	@Override
@@ -144,6 +148,31 @@ public class Horse extends Animal {
 	@Override
 	public int getDaysSinceLastBirth() {
 		return daysSinceLastBirth;
+	}
+
+	@Override
+	public boolean isDiseased() {
+		return isDiseased;
+	}
+
+	@Override
+	public int daysDiseased() {
+		return daysDiseased;
+	}
+
+	@Override
+	public void incrementDaysDiseased() {
+		daysDiseased++;
+	}
+
+	@Override
+	public void diseased() {
+		this.isDiseased = true;
+	}
+
+	@Override
+	public void healed() {
+		this.isDiseased = false;
 	}
 
 }

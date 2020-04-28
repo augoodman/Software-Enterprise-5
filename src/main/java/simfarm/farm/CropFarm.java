@@ -2,23 +2,12 @@ package main.java.simfarm.farm;
 
 import java.util.ArrayList;
 
-import main.java.simfarm.abstractfactory.FactoryProvider;
-import main.java.simfarm.abstractfactory.FarmerFactory;
+import main.java.simfarm.abstractfactory.*;
 import main.java.simfarm.animal.Animal;
 import main.java.simfarm.crop.Crop;
-import main.java.simfarm.decorator.BreederDecorator;
-import main.java.simfarm.decorator.FarmWorkerDecorator;
-import main.java.simfarm.decorator.HarvesterDecorator;
-import main.java.simfarm.decorator.HorticulturistDecorator;
-import main.java.simfarm.decorator.OwnerDecorator;
-import main.java.simfarm.decorator.VeterinarianDecorator;
-import main.java.simfarm.farmer.Breeder;
-import main.java.simfarm.farmer.FarmWorker;
-import main.java.simfarm.farmer.Farmer;
-import main.java.simfarm.farmer.Harvester;
-import main.java.simfarm.farmer.Horticulturist;
-import main.java.simfarm.farmer.Owner;
-import main.java.simfarm.farmer.Veterinarian;
+import main.java.simfarm.decorator.*;
+import main.java.simfarm.farmer.*;
+
 
 public class CropFarm extends Farm{
 	private int level;
@@ -33,18 +22,30 @@ public class CropFarm extends Farm{
 	private int veterinarianSkill;
 	private String type = "CropFarm";
 	private FactoryProvider fp = new FactoryProvider();
+	private FarmerFactory ff = (FarmerFactory) fp.getFactory("Farmer");
+	private CropFactory cf = (CropFactory) fp.getFactory("Crop");
 	private ArrayList<Farmer> farmerList = new ArrayList<Farmer>();
 	private ArrayList<Crop> cropList = new ArrayList<Crop>();
 	
 	public CropFarm() {
 		this.level = 0;
 		this.money = 1000;
-		this.acres = 5;
-		farmerList.add((Owner) fp.getFactory("Farmer").create("Owner"));
-		farmerList.add((FarmWorker) fp.getFactory("Farmer").create("FarmWorker"));
-		farmerList.add((Harvester) fp.getFactory("Farmer").create("Harvester"));
-		farmerList.add((Horticulturist) fp.getFactory("Farmer").create("Horticulturist"));
+		this.acres = 10;
+		farmerList.add(ff.create("Owner"));
+		farmerList.add(ff.create("FarmWorker"));
+		farmerList.add(ff.create("Harvester"));
+		farmerList.add(ff.create("Horticulturist"));
 		this.numFarmers = 4;
+		for(int i = 0; i < 10; i++) {
+			cropList.add(cf.create("Barley"));
+			cropList.add(cf.create("Corn"));
+			cropList.add(cf.create("Peanut"));
+			cropList.add(cf.create("Potato"));
+			cropList.add(cf.create("Rice"));
+			cropList.add(cf.create("Soybean"));
+			cropList.add(cf.create("Tomato"));
+			cropList.add(cf.create("Wheat"));
+		}
 	}
 	
 	@Override
@@ -206,25 +207,29 @@ public class CropFarm extends Farm{
 
 	@Override
 	public void buy(int price) {
-		this.money += price;
+		money -= price;
 	}
 
 	@Override
 	public void sell(int price) {
-		this.money -= price;
-	}
-	
-	public void plantCrop(Crop crop) {
-			Crop c = (Crop) fp.getFactory("Crop").create(crop.getType());
-			cropList.add(c);
-			crop.cropExchanged("bought");
+		money += price;
 	}
 
-	public void sellCrop(Crop crop, int num) {
-		for(int i = 0; i < num; i++) {
-			cropList.remove(crop);
-			crop.cropExchanged("sold");
+	@Override
+	public int levelUp() {
+		if(this.money >= 25000 && this.money < 50000) {
+			this.level = 2;
 		}
+		else if(this.money >= 50000 && this.money < 100000) {
+			this.level = 3;
+		}
+		else if(this.money >= 100000 && this.money < 200000) {
+			this.level = 4;
+		}
+		else if(this.money >= 200000) {
+			this.level = 5;
+		}
+		return level;
 	}
 
 }

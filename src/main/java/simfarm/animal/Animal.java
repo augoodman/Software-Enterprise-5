@@ -28,6 +28,11 @@ public abstract class Animal {
 	public abstract Animal giveBirth(Farm farm, AbstractFactory<Animal> af);
 	public abstract void incrementDaysSinceLastBirth();
 	public abstract int getDaysSinceLastBirth();
+	public abstract boolean isDiseased();
+	public abstract int daysDiseased();
+	public abstract void incrementDaysDiseased();
+	public abstract void diseased();
+	public abstract void healed();
 
     @Override
     public String toString(){

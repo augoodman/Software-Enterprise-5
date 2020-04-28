@@ -2,23 +2,11 @@ package main.java.simfarm.farm;
 
 import java.util.ArrayList;
 
-import main.java.simfarm.abstractfactory.FactoryProvider;
-import main.java.simfarm.abstractfactory.FarmerFactory;
+import main.java.simfarm.abstractfactory.*;
 import main.java.simfarm.animal.Animal;
 import main.java.simfarm.crop.Crop;
-import main.java.simfarm.decorator.BreederDecorator;
-import main.java.simfarm.decorator.FarmWorkerDecorator;
-import main.java.simfarm.decorator.HarvesterDecorator;
-import main.java.simfarm.decorator.HorticulturistDecorator;
-import main.java.simfarm.decorator.OwnerDecorator;
-import main.java.simfarm.decorator.VeterinarianDecorator;
-import main.java.simfarm.farmer.Breeder;
-import main.java.simfarm.farmer.FarmWorker;
-import main.java.simfarm.farmer.Farmer;
-import main.java.simfarm.farmer.Harvester;
-import main.java.simfarm.farmer.Horticulturist;
-import main.java.simfarm.farmer.Owner;
-import main.java.simfarm.farmer.Veterinarian;
+import main.java.simfarm.decorator.*;
+import main.java.simfarm.farmer.*;
 
 public class AnimalFarm extends Farm{
 	private int level;
@@ -33,18 +21,40 @@ public class AnimalFarm extends Farm{
 	private int veterinarianSkill;
 	private String type = "AnimalFarm";
 	private FactoryProvider fp = new FactoryProvider();
+	private FarmerFactory ff = (FarmerFactory) fp.getFactory("Farmer");
+	private AnimalFactory af = (AnimalFactory) fp.getFactory("Animal");
 	private ArrayList<Farmer> farmerList = new ArrayList<Farmer>();
 	private ArrayList<Animal> animalList = new ArrayList<Animal>();
 	
 	public AnimalFarm() {
 		this.level = 0;
 		this.money = 1000;
-		this.acres = 5;
-		farmerList.add((Owner) fp.getFactory("Farmer").create("Owner"));
-		farmerList.add((Breeder) fp.getFactory("Farmer").create("Breeder"));
-		farmerList.add((FarmWorker) fp.getFactory("Farmer").create("FarmWorker"));
-		farmerList.add((Veterinarian) fp.getFactory("Farmer").create("Veterinarian"));
+		this.acres = 10;
+		farmerList.add(ff.create("Owner"));
+		farmerList.add(ff.create("Breeder"));
+		farmerList.add(ff.create("FarmWorker"));
+		farmerList.add(ff.create("Veterinarian"));
 		this.numFarmers = 4;
+		animalList.add(af.create("Chicken"));
+		animalList.add(af.create("Chicken"));
+		animalList.add(af.create("Cow"));
+		animalList.add(af.create("Cow"));
+		animalList.add(af.create("Goat"));
+		animalList.add(af.create("Goat"));
+		animalList.add(af.create("Horse"));
+		animalList.add(af.create("Horse"));
+		animalList.add(af.create("Pig"));
+		animalList.add(af.create("Pig"));
+		animalList.add(af.create("Sheep"));
+		animalList.add(af.create("Sheep"));
+		for(Animal animal : animalList) {
+			if(animalList.indexOf(animal) % 2 == 0) {
+				animal.setGender("Female");
+			}
+			else {
+				animal.setGender("Male");
+			}
+		}
 	}
 	
 	@Override
@@ -206,27 +216,29 @@ public class AnimalFarm extends Farm{
 
 	@Override
 	public void buy(int price) {
-		this.money += price;
+		money -= price;
 	}
 
 	@Override
 	public void sell(int price) {
-		this.money -= price;
-	}
-	
-	public void buyAnimal(Animal animal, int num) {
-		for (int i = 0; i < num; i++) {
-			Animal a = (Animal) fp.getFactory("Crop").create(animal.getType());
-			animalList.add(a);
-			animal.animalExchanged("bought");
-		}
+		money += price;
 	}
 
-	public void sellAnimal(Animal animal, int num) {
-		for(int i = 0; i < num; i++) {
-			animalList.remove(animal);
-			animal.animalExchanged("sold");
+	@Override
+	public int levelUp() {
+		if(this.money >= 25000 && this.money < 50000) {
+			this.level = 2;
 		}
+		else if(this.money >= 50000 && this.money < 100000) {
+			this.level = 3;
+		}
+		else if(this.money >= 100000 && this.money < 200000) {
+			this.level = 4;
+		}
+		else if(this.money >= 200000) {
+			this.level = 5;
+		}
+		return level;
 	}
-	
+
 }
