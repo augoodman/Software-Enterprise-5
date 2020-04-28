@@ -1,6 +1,7 @@
 package test.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import main.java.simfarm.abstractfactory.AbstractFactory;
@@ -19,6 +20,7 @@ public class FarmTest {
     int test4Expected;
     int test5Expected;
     int test6Expected;
+    int test6bExpected;
     int test7Expected;
 
     /**
@@ -34,6 +36,7 @@ public class FarmTest {
         test4Expected = 0;
         test5Expected = 1000;
         test6Expected = 6;
+        test6bExpected = 4;
         test7Expected = 10;
 
         fl.add(aff.create("AnimalFarm"));
@@ -58,23 +61,153 @@ public class FarmTest {
     }
 
     @Test
-    public void getLevelTest() {
+    public void getLevelTest0() {
         assertEquals(test4Expected, fl.get(0).getLevel());
     }
 
     @Test
-    public void getMoneyTest() {
+    public void getLevelTest1() {
+        assertEquals(test4Expected, fl.get(1).getLevel());
+    }
+
+    @Test
+    public void getLevelTest2() {
+        assertEquals(test4Expected, fl.get(2).getLevel());
+    }
+
+    @Test
+    public void getMoneyTest0() {
+        assertEquals(test5Expected, fl.get(0).getMoney());
+    }
+
+    @Test
+    public void getMoneyTest1() {
         assertEquals(test5Expected, fl.get(1).getMoney());
     }
 
     @Test
-    public void getNumFarmersTest() {
+    public void getMoneyTest2() {
+        assertEquals(test5Expected, fl.get(2).getMoney());
+    }
+
+    @Test
+    public void getNumFarmersTest0() {
+        assertEquals(test6bExpected, fl.get(0).getNumFarmers());
+    }
+
+    @Test
+    public void getNumFarmersTest1() {
+        assertEquals(test6bExpected, fl.get(1).getNumFarmers());
+    }
+
+    @Test
+    public void getNumFarmersTest2() {
         assertEquals(test6Expected, fl.get(2).getNumFarmers());
     }
 
     @Test
-    public void getAcresTest() {
+    public void getAcresTest0() {
         assertEquals(test7Expected, fl.get(0).getAcres());
+    }
+
+    @Test
+    public void getAcresTest1() {
+        assertEquals(test7Expected, fl.get(1).getAcres());
+    }
+
+    @Test
+    public void getAcresTest2() {
+        assertEquals(test7Expected, fl.get(2).getAcres());
+    }
+
+    @Test
+    public void hireFarmerTest0() {
+        fl.get(0).hireFarmer("Breeder");
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Breeder"));
+    }
+
+    @Test
+    public void hireFarmerTest1() {
+        fl.get(0).hireFarmer("FarmWorker");
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("FarmWorker"));
+    }
+
+    @Test
+    public void hireFarmerTest2() {
+        fl.get(0).hireFarmer("Harvester");
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Harvester"));
+    }
+
+    @Test
+    public void hireFarmerTest3() {
+        fl.get(0).hireFarmer("Horticulturist");
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Horticulturist"));
+    }
+
+    @Test
+    public void hireFarmerTest4() {
+        fl.get(0).hireFarmer("Veterinarian");
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Veterinarian"));
+    }
+
+    @Test
+    public void hireFarmerTest0b() {
+        fl.get(1).hireFarmer("Breeder");
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Breeder"));
+    }
+
+    @Test
+    public void hireFarmerTest1b() {
+        fl.get(1).hireFarmer("FarmWorker");
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("FarmWorker"));
+    }
+
+    @Test
+    public void hireFarmerTest2b() {
+        fl.get(1).hireFarmer("Harvester");
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Harvester"));
+    }
+
+    @Test
+    public void hireFarmerTest3b() {
+        fl.get(1).hireFarmer("Horticulturist");
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Horticulturist"));
+    }
+
+    @Test
+    public void hireFarmerTest4b() {
+        fl.get(1).hireFarmer("Veterinarian");
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Veterinarian"));
+    }
+
+    @Test
+    public void hireFarmerTest0c() {
+        fl.get(2).hireFarmer("Breeder");
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Breeder"));
+    }
+
+    @Test
+    public void hireFarmerTest1c() {
+        fl.get(2).hireFarmer("FarmWorker");
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("FarmWorker"));
+    }
+
+    @Test
+    public void hireFarmerTest2c() {
+        fl.get(2).hireFarmer("Harvester");
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Harvester"));
+    }
+
+    @Test
+    public void hireFarmerTest3c() {
+        fl.get(2).hireFarmer("Horticulturist");
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Horticulturist"));
+    }
+
+    @Test
+    public void hireFarmerTest4c() {
+        fl.get(2).hireFarmer("Veterinarian");
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Veterinarian"));
     }
 
 }

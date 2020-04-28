@@ -76,10 +76,45 @@ public class FarmerTest {
     }
 
     @Test
-    public void decoratorTest() {
+    public void decoratorTest0() {
         fl.get(0).decorate();
         ;
         assertEquals(test7Expected, fl.get(0).isDecorated());
+    }
+
+    @Test
+    public void decoratorTest1() {
+        fl.get(1).decorate();
+        ;
+        assertEquals(test7Expected, fl.get(1).isDecorated());
+    }
+
+    @Test
+    public void decoratorTest2() {
+        fl.get(2).decorate();
+        ;
+        assertEquals(test7Expected, fl.get(2).isDecorated());
+    }
+
+    @Test
+    public void decoratorTest3() {
+        fl.get(3).decorate();
+        ;
+        assertEquals(test7Expected, fl.get(3).isDecorated());
+    }
+
+    @Test
+    public void decoratorTest4() {
+        fl.get(4).decorate();
+        ;
+        assertEquals(test7Expected, fl.get(4).isDecorated());
+    }
+
+    @Test
+    public void decoratorTest5() {
+        fl.get(5).decorate();
+        ;
+        assertEquals(test7Expected, fl.get(5).isDecorated());
     }
 
 }

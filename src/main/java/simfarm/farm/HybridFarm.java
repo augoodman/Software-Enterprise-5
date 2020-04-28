@@ -15,7 +15,11 @@ import main.java.simfarm.decorator.HorticulturistDecorator;
 import main.java.simfarm.decorator.OwnerDecorator;
 import main.java.simfarm.decorator.VeterinarianDecorator;
 import main.java.simfarm.farmer.Breeder;
+import main.java.simfarm.farmer.FarmWorker;
 import main.java.simfarm.farmer.Farmer;
+import main.java.simfarm.farmer.Harvester;
+import main.java.simfarm.farmer.Horticulturist;
+import main.java.simfarm.farmer.Veterinarian;
 
 public class HybridFarm extends Farm {
     private int level;
@@ -147,11 +151,37 @@ public class HybridFarm extends Farm {
         this.type = type;
     }
 
+
     @Override
     public void hireFarmer(String farmerType) {
-        Farmer f = (Breeder) fp.getFactory("Farmer").create(farmerType);
-        farmerList.add(f);
-        numFarmers++;
+        switch (farmerType) {
+            case "Breeder":
+                Farmer b = (Breeder) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(b);
+                numFarmers++;
+                break;
+            case "FarmWorker":
+                Farmer f = (FarmWorker) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(f);
+                numFarmers++;
+                break;
+            case "Harvester":
+                Farmer h = (Harvester) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(h);
+                numFarmers++;
+                break;
+            case "Horticulturist":
+                Farmer ho = (Horticulturist) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(ho);
+                numFarmers++;
+                break;
+            default:
+                Farmer v = (Veterinarian) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(v);
+                numFarmers++;
+
+        }
+
     }
 
     @Override
