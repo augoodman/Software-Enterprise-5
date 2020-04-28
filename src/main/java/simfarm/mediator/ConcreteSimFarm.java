@@ -2,6 +2,7 @@ package main.java.simfarm.mediator;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import main.java.simfarm.abstractfactory.AbstractFactory;
 import main.java.simfarm.abstractfactory.AnimalFactory;
@@ -50,6 +51,7 @@ public class ConcreteSimFarm extends AbstractSimFarm {
      * runs the simulation logic.
      */
     public void simulate(Farm farm, AbstractSimFarm simFarm, ManageLand ml) {
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         boolean bankrupt = false;
         boolean hasCrop = false;
         boolean hasAnimal = false;
@@ -432,6 +434,7 @@ public class ConcreteSimFarm extends AbstractSimFarm {
 
             simFarm.send("\nCash on hand: $" + farm.getMoney() + "\n");
         }
+        scanner.close();
         simFarm.send("SIMULATION OVER!");
     }
 

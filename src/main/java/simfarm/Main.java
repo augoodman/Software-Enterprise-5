@@ -1,7 +1,7 @@
 package main.java.simfarm;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Scanner;
 
 import main.java.simfarm.abstractfactory.AbstractFactory;
 import main.java.simfarm.abstractfactory.FactoryProvider;
@@ -15,24 +15,35 @@ import main.java.simfarm.simulation.ManageLand;
 
 public class Main {
     public static void main(String[] args) {
+        int numFarms;
         AbstractFactory<Farm> f = FactoryProvider.getFactory("Farm");
         ArrayList<Farm> farmList = new ArrayList<Farm>();
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println("Welcome to SimFarm. Please see the README for simulation details.");
         System.out.println("How many farms would you like to simulate?");
-        Random random = new Random();
-        int farmType = random.nextInt(3);
-        switch (farmType) {
-            case 0:
-                Farm af = f.create("AnimalFarm");
-                farmList.add(af);
-                break;
-            case 1:
-                Farm cf = f.create("CropFarm");
-                farmList.add(cf);
-                break;
-            default:
-                Farm hf = f.create("HybridFarm");
-                farmList.add(hf);
+        numFarms = scanner.nextInt();
+        int[] farmArray = new int[numFarms];
+        for (int i = 0; i < numFarms; i++) {
+            System.out.println("Choose farm-type for farm #" + (i + 1) + ":");
+            System.out.println("1: Animal Farm");
+            System.out.println("2: Crop Farm");
+            System.out.println("3: Hybrid Farm");
+            farmArray[i] = scanner.nextInt();
+        }
+        for (int farmType : farmArray) {
+            switch (farmType) {
+                case 1:
+                    Farm af = f.create("AnimalFarm");
+                    farmList.add(af);
+                    break;
+                case 2:
+                    Farm cf = f.create("CropFarm");
+                    farmList.add(cf);
+                    break;
+                default:
+                    Farm hf = f.create("HybridFarm");
+                    farmList.add(hf);
+            }
         }
         for (Farm farm : farmList) {
             MediatorInterface mediator = new ConcreteMediator();
@@ -44,6 +55,7 @@ public class Main {
             String msg = newFarmMsg(farm);
             simFarm.send(msg);
             csf.simulate(farm, simFarm, ml);
+            scanner.close();
         }
     }
 
