@@ -25,22 +25,22 @@ public class AnimalFactory implements AbstractFactory<Animal> {
         
         else if ("Goat".equalsIgnoreCase(t)) {
         	rollNewStats();
-            return new Cow(size, diseaseResistance, breedability, aggression);
+            return new Goat(size, diseaseResistance, breedability, aggression);
         }   
         
         else if ("Horse".equalsIgnoreCase(t)) {
         	rollNewStats();
-            return new Cow(size, diseaseResistance, breedability, aggression);
+            return new Horse(size, diseaseResistance, breedability, aggression);
         }     
         
         else if ("Pig".equalsIgnoreCase(t)) {
         	rollNewStats();
-            return new Cow(size, diseaseResistance, breedability, aggression);
+            return new Pig(size, diseaseResistance, breedability, aggression);
         }   
         
         else if ("Sheep".equalsIgnoreCase(t)) {
         	rollNewStats();
-            return new Cow(size, diseaseResistance, breedability, aggression);
+            return new Sheep(size, diseaseResistance, breedability, aggression);
         }
 
         return null;

@@ -11,7 +11,7 @@ public class Disease {
 	public void spreadDisease(Farm farm) {
 		if(farm.getType().equalsIgnoreCase("AnimalFarm") || farm.getType().equalsIgnoreCase("HybridFarm")) {
 			for(Animal animal : farm.getAnimals()) {
-				int viral = r.nextInt(25);
+				int viral = r.nextInt(33);
 				if(animal.getDiseaseResistance() <= viral) {
 					diseasedAnimal(animal);
 				}
@@ -19,7 +19,7 @@ public class Disease {
 		}
 		if(farm.getType().equalsIgnoreCase("CropFarm") || farm.getType().equalsIgnoreCase("HybridFarm")) {
 			for(Crop crop : farm.getCrops()) {
-				int viral = r.nextInt(25);
+				int viral = r.nextInt(67);
 				if(crop.getDiseaseResistance() <= viral) {
 					diseasedCrop(crop);
 				}

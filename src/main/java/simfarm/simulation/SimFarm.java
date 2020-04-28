@@ -117,7 +117,6 @@ public class SimFarm {
 					simFarm.send("..." + numAnimalsSlaughtered + " animals slaughtered and sold.");
 					simFarm.send("...$" + moneyFromAnimalSale + " made from sale of meat, eggs, milk and wool.\n");
 				}
-				
 				//sell crops
 				if(hasCrop) {
 					int moneyBeforeCropSale = farm.getMoney();
@@ -133,7 +132,7 @@ public class SimFarm {
 				if(hasAnimal) {
 					int numAnimalsBefore = farm.getAnimals().size();
 					int moneyBefore = farm.getMoney();
-					for(int i = 0; i < farm.getLevel() + 1; i++) {
+					for(int i = 0; i < (farm.getLevel() + 1) * 2; i++) {
 						if(ml.isLandAvailable(farm)) {
 							ea.buyAnimals(farm, (AnimalFactory) af);
 						}
@@ -143,22 +142,25 @@ public class SimFarm {
 					int animalsBought = numAnimalsAfter - numAnimalsBefore;
 					int moneySpent = moneyBefore - moneyAfter;
 					//discount based on business skill
-					double discount = (double) farm.getBusinessSkill() / 1000;
+					double discount = (double) farm.getBusinessSkill() / 10000;
+					if(discount > .5) {
+						discount = .5;
+					}
 					farm.sell((int) ((double) moneySpent * discount));
 					simFarm.send("Purchasing animals...");
 					simFarm.send("..." + animalsBought + " animals purchased.");
 					simFarm.send("...$" + (moneySpent - (int) ((double) moneySpent * discount)) + " spent on new animals today.\n");
 				}
-				
 				//plant new crops
 				if(hasCrop) {
 					int numCropsBefore = farm.getCrops().size();
 					int moneyBefore = farm.getMoney();
-					for(int i = 0; i < farm.getFarmWorkerSkill(); i++) {
-						if(landAvailable) {
+					for(int i = 0; i < farm.getFarmWorkerSkill() / 10; i++) {
+						if(ml.isLandAvailable(farm) && farm.getCrops().size() < (farm.getFarmWorkerSkill() / 5)) {
 							mc.plantCrops(farm, (CropFactory) cf, ml);
 						}
 					}
+
 					int numCropsAfter = farm.getCrops().size();
 					int moneyAfter = farm.getMoney();
 					int cropsPlanted = numCropsAfter - numCropsBefore;
@@ -166,6 +168,9 @@ public class SimFarm {
 					
 					//discount based on business skill
 					double discount = (double) farm.getBusinessSkill() / 1000;
+					if(discount > .5) {
+						discount = .5;
+					}	
 					farm.sell((int) ((double) moneySpent * discount));
 					simFarm.send("Planting crops...");
 					simFarm.send("..." + cropsPlanted + " crops planted.");
@@ -225,7 +230,7 @@ public class SimFarm {
 				
 				//treat crops
 				if(hasCrop) {
-					int hortCapacity = farm.getHorticultureSkill() / 2;
+					int hortCapacity = farm.getHorticultureSkill() / 25;
 					int cropsTreated = 0;
 					int diseasedCrops = 0;
 					for(Crop crop : farm.getCrops()) {
@@ -235,7 +240,7 @@ public class SimFarm {
 						if(crop.isDiseased() && cropsTreated <= hortCapacity && farm.getMoney() >= 2) {
 							crop.healed();
 							cropsTreated++;
-							farm.buy(2);
+							farm.buy(1);
 						}
 					}
 					simFarm.send("Checking status of crops...");
@@ -419,8 +424,8 @@ public class SimFarm {
 				if(hasAnimal) {
 					if(farm.getAnimals().size() > 0) {
 						int victim = r.nextInt(farm.getAnimals().size());
+						String deadAnimal = farm.getAnimals().get(victim).getType();
 						if(farm.getAnimals().get(victim).getAggression() < r.nextInt(50)) {
-							String deadAnimal = farm.getAnimals().get(victim).getType();
 							farm.getAnimals().remove(victim);
 							simFarm.send("..." + deadAnimal + " was killed by a wolf.");
 						}

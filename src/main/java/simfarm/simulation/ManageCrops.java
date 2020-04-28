@@ -12,51 +12,51 @@ public class ManageCrops {
 		int cropToPlant = r.nextInt(8);
 		switch(cropToPlant) {
 		case 0:
-			if(farm.getMoney() > 1 && ml.isLandAvailable(farm) == true) {
+			if(farm.getMoney() > 2 && ml.isLandAvailable(farm) == true) {
 				farm.getCrops().add(cf.create("Barley"));
-				farm.buy(1);
+				farm.buy(2);
 			}
 			break;
 		case 1:
-			if(farm.getMoney() > 2 && ml.isLandAvailable(farm) == true) {
+			if(farm.getMoney() > 4 && ml.isLandAvailable(farm) == true) {
 				farm.getCrops().add(cf.create("Corn"));
-				farm.buy(2);
+				farm.buy(4);
 			}
 			break;
 		case 2:
-			if(farm.getMoney() > 1 && ml.isLandAvailable(farm) == true) {
+			if(farm.getMoney() > 2 && ml.isLandAvailable(farm) == true) {
 				farm.getCrops().add(cf.create("Peanut"));
-				farm.buy(1);
+				farm.buy(2);
 			}
 			break;
 		case 3:
-			if(farm.getMoney() > 2 && ml.isLandAvailable(farm) == true) {
+			if(farm.getMoney() > 4 && ml.isLandAvailable(farm) == true) {
 				farm.getCrops().add(cf.create("Potato"));
-				farm.buy(2);
+				farm.buy(4);
 			}
 			break;
 		case 4:
-			if(farm.getMoney() > 1 && ml.isLandAvailable(farm) == true) {
-				farm.getCrops().add(cf.create("Rice"));
-				farm.buy(1);
-			}
-			break;
-		case 5:
-			if(farm.getMoney() > 1 && ml.isLandAvailable(farm) == true) {
-				farm.getCrops().add(cf.create("Soybean"));
-				farm.buy(1);
-			}
-			break;
-		case 6:
 			if(farm.getMoney() > 2 && ml.isLandAvailable(farm) == true) {
-				farm.getCrops().add(cf.create("Tomato"));
+				farm.getCrops().add(cf.create("Rice"));
 				farm.buy(2);
 			}
 			break;
+		case 5:
+			if(farm.getMoney() > 2 && ml.isLandAvailable(farm) == true) {
+				farm.getCrops().add(cf.create("Soybean"));
+				farm.buy(2);
+			}
+			break;
+		case 6:
+			if(farm.getMoney() > 4 && ml.isLandAvailable(farm) == true) {
+				farm.getCrops().add(cf.create("Tomato"));
+				farm.buy(4);
+			}
+			break;
 		default:
-			if(farm.getMoney() > 1 && ml.isLandAvailable(farm) == true) {
+			if(farm.getMoney() > 4 && ml.isLandAvailable(farm) == true) {
 				farm.getCrops().add(cf.create("Wheat"));
-				farm.buy(1);
+				farm.buy(2);
 			}
 			break;
 		}
@@ -70,41 +70,44 @@ public class ManageCrops {
 				crop.resetAge();
 				switch(crop.getType()) {
 				case "Barley":
-					farm.sell(40);
+					farm.sell(10);
 					cropsSold++;
 					break;
 				case "Corn":
-					farm.sell(50);
+					farm.sell(20);
 					cropsSold++;
 					break;
 				case "Peanut":
-					farm.sell(40);
+					farm.sell(10);
 					cropsSold++;
 					break;
 				case "Potato":
-					farm.sell(50);
+					farm.sell(20);
 					cropsSold++;
 					break;
 				case "Rice":
-					farm.sell(40);
+					farm.sell(10);
 					cropsSold++;
 					break;
 				case "Soybean":
-					farm.sell(40);
+					farm.sell(20);
 					cropsSold++;
 					break;
 				case "Tomato":
-					farm.sell(50);
+					farm.sell(10);
 					cropsSold++;
 					break;
 				default:
-					farm.sell(40);
+					farm.sell(10);
 					cropsSold++;
 				}
 			}
 		}
 		//bonus sales price based on harvester skill
 		double bonus = (double) farm.getHarvesterSkill() / 1000;
+		if(bonus > .5) {
+			bonus = .5;
+		}
 		farm.sell((int) ((double) runningTotal * bonus));
 		return cropsSold;
 	}

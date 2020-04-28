@@ -22,7 +22,7 @@ public class BabyAnimals {
 				female = animal;
 				femaleType = animal.getType();
 			}
-			if(animal.getGender().equalsIgnoreCase("Male") && animal.getAge() >= 3) {
+			else if(animal.getGender().equalsIgnoreCase("Male") && animal.getAge() >= 3) {
 				male = animal;
 				maleType = animal.getType();
 			}
@@ -30,7 +30,7 @@ public class BabyAnimals {
 				int femaleBreedability = female.getBreedability();
 				int maleBreedability = male.getBreedability();
 				int fertility = femaleBreedability + maleBreedability;
-				int chances = r.nextInt(100);
+				int chances = r.nextInt(200);
 				if(fertility > chances) {
 					female.makePregnant();
 				}

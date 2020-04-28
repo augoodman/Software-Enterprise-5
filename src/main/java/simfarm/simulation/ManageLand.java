@@ -5,52 +5,59 @@ import main.java.simfarm.crop.Crop;
 import main.java.simfarm.farm.Farm;
 
 public class ManageLand {
-	private int numChickens = 0;
-	private int numCowsAndPigs = 0;
-	private int numGoatsAndSheep = 0;
-	private int numHorses = 0;
-	private int numBarleyAndRiceAndWheat = 0;
-	private int numCornAndPotatoesAndTomatoes = 0;
-	private int numPeanutsAndSoybeans = 0;
 	private boolean landAvailable;
 
 	public int getAvailableLand(Farm farm) {
 		int totalLand = farm.getAcres();
 		double landUsed;
 		int availableLand = 0;
+		int [] numEachAnimal = new int[4];
+		int [] numEachCrop = new int[3];
 		if(farm.getType().equalsIgnoreCase("AnimalFarm") || farm.getType().equalsIgnoreCase("HybridFarm")) {
-			calcNumEachAnimal(farm);
+			numEachAnimal = calcNumEachAnimal(farm);
 		}
 		if(farm.getType().equalsIgnoreCase("CropFarm") || farm.getType().equalsIgnoreCase("HybridFarm")) {
-			calcNumEachCrop(farm);
+			numEachCrop = calcNumEachCrop(farm);
 		}
-		landUsed = calcLandUsed(totalLand, farm);
+		landUsed = calcLandUsed(totalLand, farm, numEachAnimal, numEachCrop);
 		availableLand = (int) (totalLand - landUsed);
 	    return availableLand;
 		
 	}
 
-	public void calcNumEachAnimal(Farm farm) {
-		//System.out.println(farm.getAnimals().size());
-		int num = 0;
+	public int[] calcNumEachAnimal(Farm farm) {
+		int numChickens = 0;
+		int numCowsAndPigs = 0;
+		int numGoatsAndSheep = 0;
+		int numHorses = 0;
+		int[] numEachAnimal = new int[4];
 		for(Animal animal : farm.getAnimals()) {
 			if(animal.getType().equalsIgnoreCase("Chicken")) {
 				numChickens++;
-				num++;
 			}
-			if(animal.getType().equalsIgnoreCase("Cow") || animal.getType().equalsIgnoreCase("Pig")) {
+			else if(animal.getType().equalsIgnoreCase("Cow") || animal.getType().equalsIgnoreCase("Pig")) {
 				numCowsAndPigs++;
 			}
-			if(animal.getType().equalsIgnoreCase("Goat") || animal.getType().equalsIgnoreCase("Sheep")) {
+			else if(animal.getType().equalsIgnoreCase("Goat") || animal.getType().equalsIgnoreCase("Sheep")) {
 				numGoatsAndSheep++;
 			}
-			if(animal.getType().equalsIgnoreCase("Horse")) {
+			else if(animal.getType().equalsIgnoreCase("Horse")) {
 				numHorses++;
 			}
 		}
-   	}
+		numEachAnimal[0] = numChickens;
+		numEachAnimal[1] = numCowsAndPigs;
+		numEachAnimal[2] = numGoatsAndSheep;
+		numEachAnimal[3] = numHorses;
+		return numEachAnimal;
+	}
 	
-	public void calcNumEachCrop(Farm farm) {
+	public int[] calcNumEachCrop(Farm farm) {
+		int numBarleyAndRiceAndWheat = 0;
+		int numCornAndPotatoesAndTomatoes = 0;
+		int numPeanutsAndSoybeans = 0;		
+		int[] numEachCrop = new int[3];
+
 		for(Crop crop : farm.getCrops()) {
 			if(crop.getType().equalsIgnoreCase("Barley") || crop.getType().equalsIgnoreCase("Rice") || crop.getType().equalsIgnoreCase("Wheat")) {
 				numBarleyAndRiceAndWheat++;
@@ -62,9 +69,14 @@ public class ManageLand {
 				numPeanutsAndSoybeans++;
 			}
 		}
+		numEachCrop[0] = numBarleyAndRiceAndWheat;
+		numEachCrop[1] = numCornAndPotatoesAndTomatoes;
+		numEachCrop[2] = numPeanutsAndSoybeans;
+		return numEachCrop;
+		
 	}
 
-	public int calcLandUsed(int totalLand, Farm farm) {
+	public int calcLandUsed(int totalLand, Farm farm, int[] numEachAnimal, int[] numEachCrop) {
 		/*
 		 * Animals and crops consume the following amount of land:
 		 * Animals:
@@ -88,25 +100,26 @@ public class ManageLand {
         //System.out.println(farm.getAnimals().size()); 
 		int totalRoundedUp = 0;
 		if(farm.getType().equalsIgnoreCase("AnimalFarm")) {
-			double chickenSpace = numChickens / 500.0;
-			double cowAndPigSpace = numCowsAndPigs / 50.0;
-			double goatAndSheepSpace = numGoatsAndSheep / 100.0;
-			double horseSpace = numHorses / 25.0;
+			double chickenSpace = numEachAnimal[0] / 100.0;
+			double cowAndPigSpace = numEachAnimal[1] / 10.0;
+			double goatAndSheepSpace = numEachAnimal[2] / 20.0;
+			double horseSpace = numEachAnimal[3] / 5.0;
 			totalRoundedUp = (int) Math.ceil(chickenSpace + cowAndPigSpace + goatAndSheepSpace + horseSpace);
 		}
 		else if(farm.getType().equalsIgnoreCase("CropFarm")) {
-			double barleyAndRiceAndWheatSpace = numBarleyAndRiceAndWheat / 5000.0;
-			double cornAndPotatoAndTomatoSpace = numCornAndPotatoesAndTomatoes / 1000.0;
-			double peanutAndSoybeanSpace = numPeanutsAndSoybeans / 3000.0;
+			double barleyAndRiceAndWheatSpace = numEachCrop[0] / 500.0;
+			double cornAndPotatoAndTomatoSpace = numEachCrop[1] / 100.0;
+			double peanutAndSoybeanSpace = numEachCrop[2] / 400.0;
 			totalRoundedUp = (int) Math.ceil(barleyAndRiceAndWheatSpace + cornAndPotatoAndTomatoSpace + peanutAndSoybeanSpace);
 		}
 		else {
-			double chickenSpace = numChickens / 500.0;
-			double cowAndPigSpace = numCowsAndPigs / 50.0;
-			double goatAndSheepSpace = numGoatsAndSheep / 100.0;
-			double horseSpace = numHorses / 25.0;			double barleyAndRiceAndWheatSpace = numBarleyAndRiceAndWheat / 5000.0;
-			double cornAndPotatoAndTomatoSpace = numCornAndPotatoesAndTomatoes / 1000.0;
-			double peanutAndSoybeanSpace = numPeanutsAndSoybeans / 3000.0;
+			double chickenSpace = numEachAnimal[0] / 100.0;
+			double cowAndPigSpace = numEachAnimal[1] / 10.0;
+			double goatAndSheepSpace = numEachAnimal[2] / 20.0;
+			double horseSpace = numEachAnimal[3] / 5.0;
+			double barleyAndRiceAndWheatSpace = numEachCrop[0] / 500.0;
+			double cornAndPotatoAndTomatoSpace = numEachCrop[1] / 100.0;
+			double peanutAndSoybeanSpace = numEachCrop[2] / 400.0;
 			totalRoundedUp = (int) Math.ceil(chickenSpace + cowAndPigSpace + goatAndSheepSpace + horseSpace + barleyAndRiceAndWheatSpace + cornAndPotatoAndTomatoSpace + peanutAndSoybeanSpace);
 		}
 		int landUsed = totalRoundedUp;
