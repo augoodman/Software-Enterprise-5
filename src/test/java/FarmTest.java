@@ -123,91 +123,106 @@ public class FarmTest {
     @Test
     public void hireFarmerTest0() {
         fl.get(0).hireFarmer("Breeder");
-        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Breeder"));
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Breeder"));
     }
 
     @Test
     public void hireFarmerTest1() {
         fl.get(0).hireFarmer("FarmWorker");
-        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("FarmWorker"));
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("FarmWorker"));
     }
 
     @Test
     public void hireFarmerTest2() {
         fl.get(0).hireFarmer("Harvester");
-        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Harvester"));
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Harvester"));
     }
 
     @Test
     public void hireFarmerTest3() {
         fl.get(0).hireFarmer("Horticulturist");
-        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Horticulturist"));
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Horticulturist"));
     }
 
     @Test
     public void hireFarmerTest4() {
         fl.get(0).hireFarmer("Veterinarian");
-        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType().equalsIgnoreCase("Veterinarian"));
+        assertTrue(fl.get(0).getFarmers().get(fl.get(0).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Veterinarian"));
     }
 
     @Test
     public void hireFarmerTest0b() {
         fl.get(1).hireFarmer("Breeder");
-        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Breeder"));
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Breeder"));
     }
 
     @Test
     public void hireFarmerTest1b() {
         fl.get(1).hireFarmer("FarmWorker");
-        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("FarmWorker"));
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("FarmWorker"));
     }
 
     @Test
     public void hireFarmerTest2b() {
         fl.get(1).hireFarmer("Harvester");
-        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Harvester"));
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Harvester"));
     }
 
     @Test
     public void hireFarmerTest3b() {
         fl.get(1).hireFarmer("Horticulturist");
-        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Horticulturist"));
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Horticulturist"));
     }
 
     @Test
     public void hireFarmerTest4b() {
         fl.get(1).hireFarmer("Veterinarian");
-        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType().equalsIgnoreCase("Veterinarian"));
+        assertTrue(fl.get(1).getFarmers().get(fl.get(1).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Veterinarian"));
     }
 
     @Test
     public void hireFarmerTest0c() {
         fl.get(2).hireFarmer("Breeder");
-        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Breeder"));
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Breeder"));
     }
 
     @Test
     public void hireFarmerTest1c() {
         fl.get(2).hireFarmer("FarmWorker");
-        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("FarmWorker"));
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("FarmWorker"));
     }
 
     @Test
     public void hireFarmerTest2c() {
         fl.get(2).hireFarmer("Harvester");
-        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Harvester"));
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Harvester"));
     }
 
     @Test
     public void hireFarmerTest3c() {
         fl.get(2).hireFarmer("Horticulturist");
-        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Horticulturist"));
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Horticulturist"));
     }
 
     @Test
     public void hireFarmerTest4c() {
         fl.get(2).hireFarmer("Veterinarian");
-        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType().equalsIgnoreCase("Veterinarian"));
+        assertTrue(fl.get(2).getFarmers().get(fl.get(2).getFarmers().size() - 1).getType()
+                .equalsIgnoreCase("Veterinarian"));
     }
 
 }

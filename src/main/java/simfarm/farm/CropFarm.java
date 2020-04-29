@@ -268,5 +268,10 @@ public class CropFarm extends Farm {
         }
         return level;
     }
-
+    
+    @Override
+    public void setBusinessSkill(int bs) {
+        this.businessSkill = bs;
+    }
+    
 }

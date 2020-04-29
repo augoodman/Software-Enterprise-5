@@ -14,8 +14,8 @@ import main.java.simfarm.decorator.HorticulturistDecorator;
 import main.java.simfarm.decorator.OwnerDecorator;
 import main.java.simfarm.decorator.VeterinarianDecorator;
 import main.java.simfarm.farmer.Breeder;
-import main.java.simfarm.farmer.Farmer;
 import main.java.simfarm.farmer.FarmWorker;
+import main.java.simfarm.farmer.Farmer;
 import main.java.simfarm.farmer.Harvester;
 import main.java.simfarm.farmer.Horticulturist;
 import main.java.simfarm.farmer.Veterinarian;
@@ -276,5 +276,10 @@ public class AnimalFarm extends Farm {
         }
         return level;
     }
-
+    
+    @Override
+    public void setBusinessSkill(int bs) {
+        this.businessSkill = bs;
+    }
+    
 }

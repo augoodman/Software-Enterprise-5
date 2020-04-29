@@ -33,8 +33,6 @@ import main.java.simfarm.simulation.ManageLand;
 
 public class ConcreteSimFarm extends AbstractSimFarm {
     static MediatorInterface mediator = new ConcreteMediator();
-    static int cycle = 1;
-    static boolean day;
     static boolean landAvailable = false;
 
     public ConcreteSimFarm(MediatorInterface mediator, Farm farm) {
@@ -51,8 +49,6 @@ public class ConcreteSimFarm extends AbstractSimFarm {
      * runs the simulation logic.
      */
     public void simulate(Farm farm, AbstractSimFarm simFarm, ManageLand ml) {
-        Scanner scanner = new Scanner(System.in, "UTF-8");
-        boolean bankrupt = false;
         boolean hasCrop = false;
         boolean hasAnimal = false;
         boolean hasBoth = false;
@@ -76,10 +72,9 @@ public class ConcreteSimFarm extends AbstractSimFarm {
         AbstractFactory<Farmer> ff = (FarmerFactory) FactoryProvider.getFactory("Farmer");
         ManageCrops mc = new ManageCrops();
         ExchangeAnimals ea = new ExchangeAnimals();
+        int cycle = 1;
         while (farm.getMoney() < 500000) {
             simFarm.send(("\nDay " + cycle + ":"));
-            day = true;
-
             // upgrade farm
             int level = farm.levelUp();
             if (level == 2 && level2Reached == false) {
@@ -372,8 +367,6 @@ public class ConcreteSimFarm extends AbstractSimFarm {
                 }
             }
             simFarm.send(("\nNight " + cycle + ":"));
-            day = false;
-
             // kill diseased animals and crops
             ArrayList<Animal> diseasedAnimals = new ArrayList<Animal>();
             ArrayList<Crop> diseasedCrops = new ArrayList<Crop>();
@@ -434,16 +427,7 @@ public class ConcreteSimFarm extends AbstractSimFarm {
 
             simFarm.send("\nCash on hand: $" + farm.getMoney() + "\n");
         }
-        scanner.close();
         simFarm.send("SIMULATION OVER!");
-    }
-
-    private static boolean getTime() {
-        return day;
-    }
-
-    private static int getCycle() {
-        return cycle;
     }
 
 }

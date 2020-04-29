@@ -14,6 +14,11 @@ import main.java.simfarm.mediator.MediatorInterface;
 import main.java.simfarm.simulation.ManageLand;
 
 public class Main {
+    /**
+     * main method.
+     * 
+     * @param args main args
+     */
     public static void main(String[] args) {
         int numFarms;
         AbstractFactory<Farm> f = FactoryProvider.getFactory("Farm");

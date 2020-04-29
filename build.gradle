@@ -60,3 +60,10 @@ spotbugs {
 run{
     standardInput = System.in
 }
+
+test {
+    reports {
+        junitXml.enabled = false
+        html.enabled = true
+    }               
+}

@@ -68,4 +68,6 @@ public abstract class Farm {
         return "Level = " + this.getLevel() + ", Money = " + this.getMoney() + ", Employees = "
                 + this.getNumFarmers() + ", Size = " + this.getAcres();
     }
+
+    public abstract void setBusinessSkill(int i);
 }

@@ -292,5 +292,10 @@ public class HybridFarm extends Farm {
         }
         return level;
     }
+    
+    @Override
+    public void setBusinessSkill(int bs) {
+        this.businessSkill = bs;
+    }
 
 }
