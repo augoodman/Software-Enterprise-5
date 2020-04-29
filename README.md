@@ -47,4 +47,6 @@ several times per cycle.  The decorator is also heavily dependent upon the abstr
 abstract factory to create new farmer of the correct type with the boosted stats.  The decorator is also dependent upon the mediator, since the mediator 
 allows a promotion once per 10 days.
 
+GitHub link: https://github.com/augoodma/assign5git
+Travis CI link: https://travis-ci.com/github/augoodma/assign5git
 Screencast link: https://youtu.be/YKtB1_mj2QM
