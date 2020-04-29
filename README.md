@@ -46,3 +46,5 @@ on the abstract factory.  Anytime, a farmer is hired, an animal born or purchase
 several times per cycle.  The decorator is also heavily dependent upon the abstract factory.  When “promoting” a farmer with the decorator, it calls the 
 abstract factory to create new farmer of the correct type with the boosted stats.  The decorator is also dependent upon the mediator, since the mediator 
 allows a promotion once per 10 days.
+
+Screencast link: https://youtu.be/YKtB1_mj2QM
