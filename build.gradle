@@ -9,7 +9,7 @@ apply plugin: 'com.github.spotbugs'
 
 test.finalizedBy jacocoTestReport
 
-mainClassName = 'main.java.Main'
+mainClassName = 'main.java.simfarm.Main'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -55,4 +55,15 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 
 spotbugs {
   toolVersion = '4.0.2'
+}
+
+run{
+    standardInput = System.in
+}
+
+test {
+    reports {
+        junitXml.enabled = false
+        html.enabled = true
+    }               
 }

@@ -2,42 +2,48 @@ package main.java.simfarm.abstractfactory;
 
 import java.util.Random;
 
-import main.java.simfarm.animal.*;
+import main.java.simfarm.animal.Animal;
+import main.java.simfarm.animal.Chicken;
+import main.java.simfarm.animal.Cow;
+import main.java.simfarm.animal.Goat;
+import main.java.simfarm.animal.Horse;
+import main.java.simfarm.animal.Pig;
+import main.java.simfarm.animal.Sheep;
 
 public class AnimalFactory implements AbstractFactory<Animal> {
-	private Random r = new Random();
-	private int size = r.nextInt(100);
-	private int diseaseResistance = r.nextInt(100);
-	private int breedability = r.nextInt(100);
-	private int aggression = r.nextInt(100);
+    private Random random = new Random();
+    private int diseaseResistance;
+    private int breedability;
+    private int aggression;
 
-	@Override
-	public Animal create(String t) {
+    @Override
+    public Animal create(String t) {
         if ("Chicken".equalsIgnoreCase(t)) {
-            return new Chicken(size, diseaseResistance, breedability, aggression);
-        } 
-        
-        else if ("Cow".equalsIgnoreCase(t)) {
-            return new Cow(size, diseaseResistance, breedability, aggression);
+            rollNewStats();
+            return new Chicken(diseaseResistance, breedability, aggression);
+        } else if ("Cow".equalsIgnoreCase(t)) {
+            rollNewStats();
+            return new Cow(diseaseResistance, breedability, aggression);
+        } else if ("Goat".equalsIgnoreCase(t)) {
+            rollNewStats();
+            return new Goat(diseaseResistance, breedability, aggression);
+        } else if ("Horse".equalsIgnoreCase(t)) {
+            rollNewStats();
+            return new Horse(diseaseResistance, breedability, aggression);
+        } else if ("Pig".equalsIgnoreCase(t)) {
+            rollNewStats();
+            return new Pig(diseaseResistance, breedability, aggression);
+        } else {
+            rollNewStats();
+            return new Sheep(diseaseResistance, breedability, aggression);
         }
-        
-        else if ("Goat".equalsIgnoreCase(t)) {
-            return new Cow(size, diseaseResistance, breedability, aggression);
-        }   
-        
-        else if ("Horse".equalsIgnoreCase(t)) {
-            return new Cow(size, diseaseResistance, breedability, aggression);
-        }     
-        
-        else if ("Pig".equalsIgnoreCase(t)) {
-            return new Cow(size, diseaseResistance, breedability, aggression);
-        }   
-        
-        else if ("Sheep".equalsIgnoreCase(t)) {
-            return new Cow(size, diseaseResistance, breedability, aggression);
-        }
-        
-        return null;
-	}
+
+    }
+
+    private void rollNewStats() {
+        this.diseaseResistance = random.nextInt(100);
+        this.breedability = random.nextInt(100);
+        this.aggression = random.nextInt(100);
+    }
 
 }

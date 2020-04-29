@@ -1,53 +1,301 @@
 package main.java.simfarm.farm;
 
-public class HybridFarm extends Farm{
-	private int level;
-	private int money;
-	private int employees;
-	private int size;
-	private String name = "Hybrid Farm";
+import java.util.ArrayList;
 
-	
-	public HybridFarm() {
-		this.level = 0;
-		this.money = 1000;
-		this.employees = 1;
-		this.size = 5;
-	}
-	
-	@Override
-	public int getLevel() {
-		return level;
-	}
-	
-	@Override
-	public int getMoney() {
-		return money;
-	}
-	
-	@Override
-	public int getEmployees() {
-		return employees;
-	}
-	
-	@Override
-	public int getSize() {
-		return size;
-	}
+import main.java.simfarm.abstractfactory.AnimalFactory;
+import main.java.simfarm.abstractfactory.CropFactory;
+import main.java.simfarm.abstractfactory.FactoryProvider;
+import main.java.simfarm.abstractfactory.FarmerFactory;
+import main.java.simfarm.animal.Animal;
+import main.java.simfarm.crop.Crop;
+import main.java.simfarm.decorator.BreederDecorator;
+import main.java.simfarm.decorator.FarmWorkerDecorator;
+import main.java.simfarm.decorator.HarvesterDecorator;
+import main.java.simfarm.decorator.HorticulturistDecorator;
+import main.java.simfarm.decorator.OwnerDecorator;
+import main.java.simfarm.decorator.VeterinarianDecorator;
+import main.java.simfarm.farmer.Breeder;
+import main.java.simfarm.farmer.FarmWorker;
+import main.java.simfarm.farmer.Farmer;
+import main.java.simfarm.farmer.Harvester;
+import main.java.simfarm.farmer.Horticulturist;
+import main.java.simfarm.farmer.Veterinarian;
 
-	@Override
-	public void spendMoney(int dollars) {
-		this.money -= dollars;
-	}
+public class HybridFarm extends Farm {
+    private int level;
+    private int money;
+    private int numFarmers;
+    private int acres;
+    private int businessSkill;
+    private int farmWorkerSkill;
+    private int harvesterSkill;
+    private int breederSkill;
+    private int horticultureSkill;
+    private int veterinarianSkill;
+    private String type = "HybridFarm";
+    private FactoryProvider fp = new FactoryProvider();
+    private FarmerFactory ff = (FarmerFactory) fp.getFactory("Farmer");
+    private AnimalFactory af = (AnimalFactory) fp.getFactory("Animal");
+    private CropFactory cf = (CropFactory) fp.getFactory("Crop");
+    private ArrayList<Farmer> farmerList = new ArrayList<Farmer>();
+    private ArrayList<Animal> animalList = new ArrayList<Animal>();
+    private ArrayList<Crop> cropList = new ArrayList<Crop>();
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    /**
+     * constructor.
+     */
+    public HybridFarm() {
+        this.level = 0;
+        this.money = 1000;
+        this.acres = 10;
+        farmerList.add(ff.create("Owner"));
+        farmerList.add(ff.create("Breeder"));
+        farmerList.add(ff.create("FarmWorker"));
+        farmerList.add(ff.create("Harvester"));
+        farmerList.add(ff.create("Horticulturist"));
+        farmerList.add(ff.create("Veterinarian"));
+        this.numFarmers = 6;
+        animalList.add(af.create("Chicken"));
+        animalList.add(af.create("Chicken"));
+        animalList.add(af.create("Cow"));
+        animalList.add(af.create("Cow"));
+        animalList.add(af.create("Goat"));
+        animalList.add(af.create("Goat"));
+        animalList.add(af.create("Horse"));
+        animalList.add(af.create("Horse"));
+        animalList.add(af.create("Pig"));
+        animalList.add(af.create("Pig"));
+        animalList.add(af.create("Sheep"));
+        animalList.add(af.create("Sheep"));
+        for (Animal animal : animalList) {
+            if (animalList.indexOf(animal) % 2 == 0) {
+                animal.setGender("Female");
+            } else {
+                animal.setGender("Male");
+            }
+        }
+        for (int i = 0; i < 10; i++) {
+            cropList.add(cf.create("Barley"));
+            cropList.add(cf.create("Corn"));
+            cropList.add(cf.create("Peanut"));
+            cropList.add(cf.create("Potato"));
+            cropList.add(cf.create("Rice"));
+            cropList.add(cf.create("Soybean"));
+            cropList.add(cf.create("Tomato"));
+            cropList.add(cf.create("Wheat"));
+        }
+    }
 
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Override
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
+    public int getMoney() {
+        return money;
+    }
+
+    @Override
+    public int getNumFarmers() {
+        return numFarmers;
+    }
+
+    @Override
+    public int getAcres() {
+        return acres;
+    }
+
+    @Override
+    public int getBusinessSkill() {
+        return businessSkill;
+    }
+
+    @Override
+    public int getFarmWorkerSkill() {
+        return farmWorkerSkill;
+    }
+
+    @Override
+    public int getHarvesterSkill() {
+        return harvesterSkill;
+    }
+
+    @Override
+    public int getBreederSkill() {
+        return breederSkill;
+    }
+
+    @Override
+    public int getHorticultureSkill() {
+        return horticultureSkill;
+    }
+
+    @Override
+    public int getVeterinarianSkill() {
+        return veterinarianSkill;
+    }
+
+    @Override
+    public void transaction(int dollars) {
+        this.money -= dollars;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
+    @Override
+    public void hireFarmer(String farmerType) {
+        switch (farmerType) {
+            case "Breeder":
+                Farmer b = (Breeder) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(b);
+                numFarmers++;
+                break;
+            case "FarmWorker":
+                Farmer f = (FarmWorker) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(f);
+                numFarmers++;
+                break;
+            case "Harvester":
+                Farmer h = (Harvester) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(h);
+                numFarmers++;
+                break;
+            case "Horticulturist":
+                Farmer ho = (Horticulturist) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(ho);
+                numFarmers++;
+                break;
+            default:
+                Farmer v = (Veterinarian) fp.getFactory("Farmer").create(farmerType);
+                farmerList.add(v);
+                numFarmers++;
+
+        }
+
+    }
+
+    @Override
+    public void promoteFarmer(Farmer farmer) {
+        String farmerType = farmer.getType();
+        FarmerFactory ff = (FarmerFactory) fp.getFactory("Farmer");
+        switch (farmerType) {
+            case "Breeder":
+                transferFarmer(farmer);
+                BreederDecorator bd = new BreederDecorator((FarmerFactory) ff);
+                farmer = bd.create(farmerType);
+                farmerList.add(farmer);
+                break;
+            case "FarmWorker":
+                transferFarmer(farmer);
+                FarmWorkerDecorator fwd = new FarmWorkerDecorator((FarmerFactory) ff);
+                farmer = fwd.create(farmerType);
+                farmerList.add(farmer);
+                break;
+            case "Harvester":
+                transferFarmer(farmer);
+                HarvesterDecorator hd = new HarvesterDecorator((FarmerFactory) ff);
+                farmer = hd.create(farmerType);
+                farmerList.add(farmer);
+                break;
+            case "Horticulturist":
+                transferFarmer(farmer);
+                HorticulturistDecorator hod = new HorticulturistDecorator((FarmerFactory) ff);
+                farmer = hod.create(farmerType);
+                farmerList.add(farmer);
+                break;
+            case "Owner":
+                transferFarmer(farmer);
+                OwnerDecorator od = new OwnerDecorator((FarmerFactory) ff);
+                farmer = od.create(farmerType);
+                farmerList.add(farmer);
+                break;
+            case "Veterinarian":
+                transferFarmer(farmer);
+                VeterinarianDecorator vd = new VeterinarianDecorator((FarmerFactory) ff);
+                farmer = vd.create(farmerType);
+                farmerList.add(farmer);
+                break;
+            default:
+                System.out.println("No employees of that type to promote!");
+        }
+    }
+
+    @Override
+    public Farmer transferFarmer(Farmer farmer) {
+        farmerList.remove(farmer);
+        return farmer;
+    }
+
+    @Override
+    public void expandFarm(int acres) {
+        this.acres += acres;
+        // transaction(-pricePerAcre);
+    }
+
+    @Override
+    public void calcStats() {
+        for (Farmer farmer : farmerList) {
+            this.businessSkill += farmer.getBusinessSkill();
+            this.farmWorkerSkill += farmer.getFarmWorkerSkill();
+            this.harvesterSkill += farmer.getHarvesterSkill();
+            this.breederSkill += farmer.getBreederSkill();
+            this.horticultureSkill += farmer.getHorticultureSkill();
+            this.veterinarianSkill += farmer.getVeterinarianSkill();
+        }
+    }
+
+    @Override
+    public ArrayList<Farmer> getFarmers() {
+        return farmerList;
+    }
+
+    @Override
+    public ArrayList<Animal> getAnimals() {
+        return animalList;
+    }
+
+    @Override
+    public ArrayList<Crop> getCrops() {
+        return cropList;
+    }
+
+    @Override
+    public void buy(int price) {
+        money -= price;
+    }
+
+    @Override
+    public void sell(int price) {
+        money += price;
+    }
+
+    @Override
+    public int levelUp() {
+        if (this.money >= 25000 && this.money < 50000) {
+            this.level = 2;
+        } else if (this.money >= 50000 && this.money < 100000) {
+            this.level = 3;
+        } else if (this.money >= 100000 && this.money < 200000) {
+            this.level = 4;
+        } else if (this.money >= 200000) {
+            this.level = 5;
+        }
+        return level;
+    }
+    
+    @Override
+    public void setBusinessSkill(int bs) {
+        this.businessSkill = bs;
+    }
 
 }
